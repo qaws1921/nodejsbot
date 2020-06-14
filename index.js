@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.token;
-const welcomeChannelName = "반갑다냥";
-const byeChannelName = "반갑다냥";
-const welcomeChannelComment = "님 어서오세요.";
-const byeChannelComment = "님 안녕히가세요.";
+const welcomeChannelName = "안녕하세요";
+const byeChannelName = "안녕히가세요";
+const welcomeChannelComment = "어서오세요.";
+const byeChannelComment = "안녕히가세요.";
 
 client.on('ready', () => {
   console.log('켰다.');
@@ -17,7 +17,7 @@ client.on("guildMemberAdd", (member) => {
 
   welcomeChannel.send(`<@${newUser.id}> ${welcomeChannelComment}\n`);
 
-  member.addRole(guild.roles.find(role => role.name == "캣닢"));
+  member.addRole(guild.roles.find(role => role.name == "게스트"));
 });
 
 client.on("guildMemberRemove", (member) => {
@@ -35,33 +35,37 @@ client.on('message', (message) => {
     return message.reply('pong');
   }
 
-  if(message.content == '하린봇주소') {
-    let img = 'https://kin-phinf.pstatic.net/20120411_44/1334141105403lFoDx_JPEG/%BB%F5%B3%A2%B0%ED%BE%E7%C0%CC4.jpg?type=w750';
+  if(message.content == 'embed') {
+    let img = 'https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256';
     let embed = new Discord.RichEmbed()
-      .setTitle('주소')
+      .setTitle('타이틀')
       .setURL('http://www.naver.com')
-      .setAuthor('승호', img, 'http://www.naver.com')
+      .setAuthor('나긋해', img, 'http://www.naver.com')
       .setThumbnail(img)
       .addBlankField()
-      .addField('하린이 방송국 주소', 'http://bj.afreecatv.com/lovely000')
+      .addField('Inline field title', 'Some value here')
+      .addField('Inline field title', 'Some value here', true)
+      .addField('Inline field title', 'Some value here', true)
+      .addField('Inline field title', 'Some value here', true)
+      .addField('Inline field title', 'Some value here1\nSome value here2\nSome value here3\n')
       .addBlankField()
       .setTimestamp()
-      .setFooter('승호가 만듬', img)
+      .setFooter('나긋해가 만듬', img)
 
     message.channel.send(embed)
-  } else if(message.content == '하린봇명령어') {
-    let helpImg = 'https://kin-phinf.pstatic.net/20120411_44/1334141105403lFoDx_JPEG/%BB%F5%B3%A2%B0%ED%BE%E7%C0%CC4.jpg?type=w750';
+  } else if(message.content == 'embed2') {
+    let helpImg = 'https://images-ext-1.discordapp.net/external/RyofVqSAVAi0H9-1yK6M8NGy2grU5TWZkLadG-rwqk0/https/i.imgur.com/EZRAPxR.png';
     let commandList = [
-      {name: '테스트', desc: '봇 온라인 테스트'},
-      {name: '하린봇주소', desc: '방송국 주소'},
-      {name: '하린봇명령어', desc: '하린봇 전체 명령어'},
+      {name: 'ping', desc: '현재 핑 상태'},
+      {name: 'embed', desc: 'embed 예제1'},
+      {name: 'embed2', desc: 'embed 예제2 (help)'},
       {name: '!전체공지', desc: 'dm으로 전체 공지 보내기'},
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
-      .setAuthor('Help of 하린 BOT', helpImg)
+      .setAuthor('Help of 콜라곰 BOT', helpImg)
       .setColor('#186de6')
-      .setFooter(`하린 BOT ❤️`)
+      .setFooter(`콜라곰 BOT ❤️`)
       .setTimestamp()
     
     commandList.forEach(x => {
